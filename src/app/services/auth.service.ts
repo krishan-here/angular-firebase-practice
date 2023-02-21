@@ -51,6 +51,10 @@ export class AuthService {
     return null;
   }
 
+  fetchUserData(){
+    return this.httpClient.get('https://jsonplaceholder.typicode.com/posts');
+  }
+
   logoutCustomer() {
     this.removeUserData();
   }

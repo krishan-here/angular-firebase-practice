@@ -1,8 +1,29 @@
+<mat-tab-group>
+  <mat-tab label="Customer Details"> Content 1 </mat-tab>
+  <mat-tab label="Vehicle Details"> Content 2 </mat-tab>
+  <mat-tab label="Transaction Details">
+    <div class="m-5 p-5">
+      <table mat-table [dataSource]="userData" class="mat-elevation-z8">
+        <ng-container matColumnDef="userId">
+          <th mat-header-cell *matHeaderCellDef>User Id</th>
+          <td mat-cell *matCellDef="let user">{{ user.userId }}</td>
+        </ng-container>
 
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let user">{{ user.title }}</td>
+        </ng-container>
 
-<nav class="navbar navbar-dark bg-primary">
-  <!-- Navbar content -->
-  <div class="w-100 d-flex justify-content-end p-2">
-      <button class="btn btn-warning mx-5" (click)="logout()">logout</button>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
     </div>
-</nav>
+  </mat-tab>
+</mat-tab-group>
