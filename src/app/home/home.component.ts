@@ -10,6 +10,8 @@ import { AuthService } from '../services/auth.service';
 export class HomeComponent implements OnInit {
 
   userData = [];
+  dataLength = 0;
+  pageSize = 10;
   displayedColumns = ['userId', 'title'];
   constructor(
     private authService: AuthService,
@@ -17,15 +19,25 @@ export class HomeComponent implements OnInit {
     ){}
 
   ngOnInit(): void {
-    this.getUserData();
+    this.getUserData(0, this.pageSize);
   }
 
-  getUserData(){
-    this.authService.fetchUserData().subscribe(
+  getUserData(pageIndex: number, pageSize: number){
+    this.authService.fetchUserData(pageIndex, pageSize).subscribe(
       (res: any) => {
-        this.userData = res.splice(0,10);
+        this.userData = res.data;
+        this.dataLength = res.length;
+        console.log(this.userData);
+        
       }
     )
+  }
+
+  pageEvents(event: any){
+    console.log(event);
+    this.pageSize = event.pageSize;
+    this.getUserData(event.pageIndex, this.pageSize);
+    
   }
   
 

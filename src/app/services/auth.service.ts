@@ -51,8 +51,15 @@ export class AuthService {
     return null;
   }
 
-  fetchUserData(){
-    return this.httpClient.get('https://jsonplaceholder.typicode.com/posts');
+  fetchUserData(pageIndex: number, pageSize: number){
+    return this.httpClient.get('https://jsonplaceholder.typicode.com/posts').pipe(map((res: any) => {
+      const start = pageIndex * pageSize;
+      const length = res.length;
+      return {
+        length,
+        data: res.splice(start, pageSize)
+      };
+    }));
   }
 
   logoutCustomer() {
