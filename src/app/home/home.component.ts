@@ -9,25 +9,17 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  userData = [
-    {
-      account: 1928921,
-      type: 'Charge-off',
-      legal_relationship: 'Primary',
-      previous_account: 39322,
-      application_number: 'N/A'
-    },
-    {
-      account: 182921,
-      type: 'Shadow',
-      legal_relationship: 'Primary',
-      previous_account: 39389,
-      application_number: 'N/A'
-    }
-  ];
-  dataLength = 0;
-  pageSize = 10;
-  displayedColumns = ['account', 'type', 'legal', 'previous', 'application'];
+  customerDetail = CUSTOMER_DETAILS;
+  
+  listOfPhones = CUSTOMER_DETAILS.listOfPhoneNumbers;
+  phoneColumns = CUSTOMER_DETAILS.phonesColumn;
+
+  listOfAddress = CUSTOMER_DETAILS.listOfAddress;
+  addressColumns = CUSTOMER_DETAILS.addressColumn;
+
+
+  accountDetailsColumn = ['account', 'type', 'legal', 'previous', 'application'];
+  currentTab = 'BASIC';
   constructor(
     private authService: AuthService,
     private router: Router
@@ -37,29 +29,13 @@ export class HomeComponent implements OnInit {
     // this.getUserData(0, this.pageSize);
   }
 
-  getUserData(pageIndex: number, pageSize: number){
-    this.authService.fetchUserData(pageIndex, pageSize).subscribe(
-      (res: any) => {
-        this.userData = res.data;
-        this.dataLength = res.length;
-        console.log(this.userData);
-        
-      }
-    )
+  goToTab(tab: string){
+    this.currentTab = tab;
   }
 
-  getData(event: any){
-    console.log(event);
+  // getUserData(pageIndex: number, pageSize: number){
 
-    if(event.index == 0){
-      this.getUserData(0, this.pageSize);
-    }else if(event.index == 1){
-      this.getVehicleDetails();
-    }else{
-      this.getTransactionDetails();
-    }
-    
-  }
+  // }
 
   getVehicleDetails() {
     console.log('vehicle details');
@@ -69,13 +45,6 @@ export class HomeComponent implements OnInit {
   getTransactionDetails() {
     console.log('transaction data');
   }
-
-  pageEvents(event: any){
-    console.log(event);
-    this.pageSize = event.pageSize;
-    this.getUserData(event.pageIndex, this.pageSize);
-    
-  }
   
 
   logout(){
@@ -83,3 +52,64 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 }
+
+const CUSTOMER_DETAILS = {
+  title: 'Mr',
+  firstName: 'Rahul',
+  lastName: 'Jaydas',
+  customerNumber: '111892',
+  ssn: '***-**-1982',
+  taxIdentifier: 'N/A',
+  listOfAddress: [
+    {
+      type: 'PARMANENT',
+      address: 'Durgapur, West Bengal-713363',
+      active: true
+    },
+    {
+      type: 'RESIDENT',
+      address: 'H-6, Hyderabad',
+      active: false
+    },
+    {
+      type: 'PARMANENT',
+      address: 'Indore, Madhya Pradesh-450002',
+      active: true
+    },
+  ],
+  listOfPhoneNumbers: [
+    {
+      type: 'mobile',
+      phoneNumber: '9839382938',
+      ext: '+91',
+      timezone: 'ITC',
+      relationship: 'N/A',
+      inService: 'YES',
+      acNumber: '12893839293393'
+    },
+    {
+      type: 'phone',
+      phoneNumber: '8379382938',
+      ext: '+011',
+      timezone: 'SA',
+      relationship: 'N/A',
+      inService: 'YES',
+      acNumber: '39393839293393'
+    },
+    {
+      type: 'mobile',
+      phoneNumber: '611382938',
+      ext: '+91',
+      timezone: 'ITC',
+      relationship: 'N/A',
+      inService: 'YES',
+      acNumber: '6723839293393'
+    },
+  ],
+
+
+
+  phonesColumn: ['type', 'phoneNumber', 'ext', 'timezone', 'relationship', 'inService', 'acNumber'],
+  addressColumn: ['type', 'address', 'active']
+}
+
