@@ -46,8 +46,8 @@
             <li class="nav-item">
               <p
                 class="nav-link text-white"
-                [ngClass]="{ active: currentTab == 'BASIC' }"
-                (click)="goToTab('BASIC')"
+                [ngClass]="{ active: currentTab.customer == 'BASIC' }"
+                (click)="goToTab('customer', 'BASIC')"
               >
                 Details
               </p>
@@ -55,8 +55,8 @@
             <li class="nav-item">
               <p
                 class="nav-link text-white"
-                [ngClass]="{ active: currentTab == 'PHONE' }"
-                (click)="goToTab('PHONE')"
+                [ngClass]="{ active: currentTab.customer == 'PHONE' }"
+                (click)="goToTab('customer', 'PHONE')"
               >
                 Phone numbers
               </p>
@@ -64,15 +64,15 @@
             <li class="nav-item">
               <p
                 class="nav-link text-white"
-                [ngClass]="{ active: currentTab == 'ADDRESS' }"
-                (click)="goToTab('ADDRESS')"
+                [ngClass]="{ active: currentTab.customer == 'ADDRESS' }"
+                (click)="goToTab('customer', 'ADDRESS')"
               >
                 Addresses
               </p>
             </li>
           </ul>
         </div>
-        <ng-container *ngIf="currentTab == 'BASIC'">
+        <ng-container *ngIf="currentTab.customer == 'BASIC'">
           <div class="row bg-light border p-3 m-1 rounded border-dark">
             <div class="col-lg-4">
               <div class="d-flex justify-content-between border-bottom mb-3">
@@ -107,7 +107,7 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="currentTab == 'PHONE'">
+        <ng-container *ngIf="currentTab.customer == 'PHONE'">
           <div
             class="row bg-light border m-1 rounded border-dark overflow-auto"
           >
@@ -185,12 +185,16 @@
             </table>
           </div>
           <div class="m-3 d-flex justify-content-end gap-3">
-            <button class="btn btn-light"><i class="bi bi-chevron-left"></i> Previous</button>
-            <button class="btn btn-light">Next <i class="bi bi-chevron-right"></i></button>
+            <button class="btn btn-light">
+              <i class="bi bi-chevron-left"></i> Previous
+            </button>
+            <button class="btn btn-light">
+              Next <i class="bi bi-chevron-right"></i>
+            </button>
           </div>
         </ng-container>
 
-        <ng-container *ngIf="currentTab == 'ADDRESS'">
+        <ng-container *ngIf="currentTab.customer == 'ADDRESS'">
           <div
             class="row bg-light border m-1 rounded border-dark overflow-auto"
           >
@@ -231,60 +235,222 @@
             </table>
           </div>
           <div class="m-3 d-flex justify-content-end gap-3">
-            <button class="btn btn-light"><i class="bi bi-chevron-left"></i> Previous</button>
-            <button class="btn btn-light">Next <i class="bi bi-chevron-right"></i></button>
+            <button class="btn btn-light">
+              <i class="bi bi-chevron-left"></i> Previous
+            </button>
+            <button class="btn btn-light">
+              Next <i class="bi bi-chevron-right"></i>
+            </button>
           </div>
         </ng-container>
       </div>
     </mat-expansion-panel>
-    <!-- <mat-expansion-panel class="custom-blue mat-elevation-z" expanded>
+    <mat-expansion-panel class="custom-blue mat-elevation-z" expanded>
       <mat-expansion-panel-header>
         <p class="fs-5 text-white">Accounts</p>
       </mat-expansion-panel-header>
-      <div class="border rounded overflow-scroll border-dark">
+      <div>
+        <div class="my-2">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <p
+                class="nav-link text-white"
+                [ngClass]="{ active: currentTab.account == 'BASIC' }"
+                (click)="goToTab('account', 'BASIC')"
+              >
+                Details
+              </p>
+            </li>
+            <li class="nav-item">
+              <p
+                class="nav-link text-white"
+                [ngClass]="{ active: currentTab.account == 'LOAN_DETAILS' }"
+                (click)="goToTab('account', 'LOAN_DETAILS')"
+              >
+                Loan Details
+              </p>
+            </li>
+            <li class="nav-item">
+              <p
+                class="nav-link text-white"
+                [ngClass]="{
+                  active: currentTab.account == 'PAYMENT_SCHEDULES'
+                }"
+                (click)="goToTab('account', 'PAYMENT_SCHEDULES')"
+              >
+                Payment Schedules
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <ng-container *ngIf="currentTab.account == 'BASIC'">
+        <div class="row bg-light border p-3 m-1 rounded border-dark">
+          <div class="col-lg-4">
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Account Number</p>
+              <p>{{ accountDetail.accountNumber }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Account Status</p>
+              <p>{{ accountDetail.accountStatus }}</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Contract Date</p>
+              <p>{{ accountDetail.contractDate }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Closed Date</p>
+              <p>{{ accountDetail.closedDate }}</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Payoff Date</p>
+              <p>{{ accountDetail.payoffDate }}</p>
+            </div>
+            <!-- <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>SSN</p>
+              <p>{{ accountDetail.ssn }}</p>
+            </div> -->
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="currentTab.account == 'LOAN_DETAILS'">
+        <div class="row bg-light border p-3 m-1 rounded border-dark">
+          <div class="col-lg-4">
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Loan Balance</p>
+              <p>{{ accountDetail.loanDetails.loanBalance }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Interest Recieable Rounded</p>
+              <p>{{ accountDetail.loanDetails.interestRecieableRounded }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Payoff Amount</p>
+              <p>{{ accountDetail.loanDetails.payoffAmount }}</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Accrual Rate</p>
+              <p>{{ accountDetail.loanDetails.accrualRate }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Original Amount</p>
+              <p>{{ accountDetail.loanDetails.originalAmount }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>APR</p>
+              <p>{{ accountDetail.loanDetails.APR }}</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Overpayment Amount</p>
+              <p>{{ accountDetail.loanDetails.overpaymentAmount }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Interest Paid Life</p>
+              <p>{{ accountDetail.loanDetails.interestPaidLifetoDate }}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mb-3">
+              <p>Maturity Date</p>
+              <p>{{ accountDetail.loanDetails.maturityDate }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentTab.account == 'PAYMENT_SCHEDULES'">
+        <div
+        class="row bg-light border m-1 rounded border-dark overflow-auto"
+      >
         <table
           mat-table
-          [dataSource]="accountDetails"
+          [dataSource]="listOfPaymentSchedules"
           class="mat-elevation-z demo-table"
         >
-          <ng-container matColumnDef="account" class="border-end border-dark">
-            <th mat-header-cell *matHeaderCellDef>Account</th>
-            <td mat-cell *matCellDef="let account">{{ account.account }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="type" class="border-end border-dark">
-            <th mat-header-cell *matHeaderCellDef>Type</th>
-            <td mat-cell *matCellDef="let account">{{ account.type }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="legal" class="border-end border-dark">
-            <th mat-header-cell *matHeaderCellDef>Legal Relationship</th>
-            <td mat-cell *matCellDef="let account">
-              {{ account.legal_relationship }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="previous" class="border-end border-dark">
-            <th mat-header-cell *matHeaderCellDef>Previous Account</th>
-            <td mat-cell *matCellDef="let account">
-              {{ account.previous_account }}
+          <ng-container matColumnDef="startDate" class="border-end border-dark">
+            <th mat-header-cell *matHeaderCellDef>Start Date</th>
+            <td mat-cell *matCellDef="let phone">
+              {{ phone.startDate }}
             </td>
           </ng-container>
 
           <ng-container
-            matColumnDef="application"
+            matColumnDef="endDate"
             class="border-end border-dark"
           >
-            <th mat-header-cell *matHeaderCellDef>Application Number</th>
-            <td mat-cell *matCellDef="let account">
-              {{ account.application_number }}
+            <th mat-header-cell *matHeaderCellDef>End Date</th>
+            <td mat-cell *matCellDef="let phone">
+              {{ phone.endDate }}
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="accountDetailsColumn"></tr>
-          <tr mat-row *matRowDef="let row; columns: accountDetailsColumn"></tr>
+          <ng-container matColumnDef="frequency" class="border-end border-dark">
+            <th mat-header-cell *matHeaderCellDef>Frequency</th>
+            <td mat-cell *matCellDef="let phone">
+              {{ phone.frequency }}
+            </td>
+          </ng-container>
+
+          <ng-container
+            matColumnDef="payments"
+            class="border-end border-dark"
+          >
+            <th mat-header-cell *matHeaderCellDef>Payments</th>
+            <td mat-cell *matCellDef="let phone">
+              {{ phone.payments }}
+            </td>
+          </ng-container>
+
+          <ng-container
+            matColumnDef="amount"
+            class="border-end border-dark"
+          >
+            <th mat-header-cell *matHeaderCellDef>Amount</th>
+            <td mat-cell *matCellDef="let phone">
+              {{ phone.amount }}
+            </td>
+          </ng-container>
+
+          <ng-container
+            matColumnDef="paymentType"
+            class="border-end border-dark"
+          >
+            <th mat-header-cell *matHeaderCellDef>Payment Type</th>
+            <td mat-cell *matCellDef="let phone">
+              {{ phone.paymentType }}
+            </td>
+          </ng-container>
+
+          <ng-container
+            matColumnDef="leadDays"
+            class="border-end border-dark"
+          >
+            <th mat-header-cell *matHeaderCellDef>Lead Days</th>
+            <td mat-cell *matCellDef="let phone">
+              {{ phone.leadDays }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="paymentColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: paymentColumns"></tr>
         </table>
       </div>
-    </mat-expansion-panel> -->
+      <div class="m-3 d-flex justify-content-end gap-3">
+        <button class="btn btn-light">
+          <i class="bi bi-chevron-left"></i> Previous
+        </button>
+        <button class="btn btn-light">
+          Next <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+      </ng-container>
+    </mat-expansion-panel>
   </mat-accordion>
 </div>
