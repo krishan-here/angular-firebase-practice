@@ -1,2 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+.mdc-tab__text-label{
+    display: flex !important;
+    flex-direction: column;
+    gap: 6px;
+  }
+.mat-mdc-tab:hover{
+  // all: unset;
+}
+
+.mdc-tab--active{
+  // all: unset;
+}
+
+// mat-tab-header{
+//   position: sticky !important;
+//   top: 0;
+//   position: -webkit-sticky;
+// }

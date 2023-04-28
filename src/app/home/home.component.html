@@ -1,12 +1,22 @@
-<button mat-button (click)="openDialog()">Open dialog</button>
+<div class="border border-2 p-3 mb-3">
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore explicabo placeat quasi unde rerum ab est, voluptatem sequi dolores, assumenda nobis architecto quam. Aliquam non iste expedita corrupti. Repellat labore esse fugit laudantium repellendus autem.</p>
+</div>
 
-<ng-template #formModal>
-  <div>
-    <h1 mat-dialog-title>Delete file</h1>
-    <div mat-dialog-content>Would you like to delete cat.jpeg?</div>
-    <div mat-dialog-actions>
-      <button mat-button mat-dialog-close>No</button>
-      <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
-    </div>
-  </div>
-</ng-template>
+<div class="p-2 border border-2">
+  <mat-tab-group class="custom-tab">
+    <mat-tab id="tab">
+      <ng-template mat-tab-label>
+        <span class="tab-number">customer </span>
+        <span class="tab-text">description</span>
+      </ng-template>
+      <div class="p-2">
+        <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit rem nobis possimus.</h3>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis culpa saepe sit beatae quas rerum modi. Consectetur consequatur praesentium recusandae fugit ipsam inventore accusantium facilis aliquid! Velit asperiores tempora consequuntur officia unde quos hic beatae omnis quo quisquam magni dolorum suscipit quia, veniam repellat possimus necessitatibus temporibus eius ea dignissimos pariatur dolores. Nisi perferendis voluptas neque veritatis beatae laudantium ipsam, similique iusto sunt et magnam dolor reiciendis dicta, adipisci, maxime ipsa consequatur libero. Unde nobis at eaque illum, aspernatur velit eveniet dignissimos quas quibusdam, similique consectetur ipsa ducimus temporibus odit, cumque aliquid quidem cupiditate ex. Sapiente dolor voluptate quae sit.</p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgolBdeaXdt7hZ4G28YiA8shOCg4jkBg08uA&usqp=CAU" alt="img">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit eum tempora, nihil architecto placeat dolores dicta ipsum vitae qui! Placeat vel repellendus eveniet debitis, quia reiciendis dolores eum nesciunt voluptatibus aut eaque. Iure modi inventore illum praesentium enim ipsa nobis quae optio natus repellendus adipisci maxime, officiis at labore cum deserunt mollitia saepe in sapiente soluta iste? Laudantium culpa nostrum, officia mollitia labore alias beatae modi itaque quis debitis eligendi expedita facilis inventore quam recusandae quas sint ullam aut laborum quaerat voluptas laboriosam. Nihil magni, commodi architecto doloribus corrupti quasi provident! Reprehenderit maiores cupiditate maxime accusamus veniam quos, a quam.</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="Second text">Content 2</mat-tab>
+    <mat-tab label="Third one">Content 3</mat-tab>
+  </mat-tab-group>
+</div>
